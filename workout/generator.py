@@ -25,8 +25,9 @@ def _generate_by_template(volume, sets, template):
 def _format_workout(workout, sets):
     formatted = []
     for e in workout:
-        formatted.append("{} {} sets of {}".format(e[0][0], sets, e[1]))
-    return formatted
+        formatted.append("{} x {}".format(e[0][0], e[1]))
+    formatted = "\n".join(formatted)
+    return formatted + "\n\nDo {} sets of each exercise".format(sets)
 
 
 def generate_balanced(volume, sets):
