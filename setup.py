@@ -8,5 +8,6 @@ setup(
     author_email='thedjaney@gmail.com',
     install_requires=[],
     packages=['workout'],
-    scripts=['generate-workout']
+    scripts=['generate-workout'],
+    python_requires='>=3'
 )

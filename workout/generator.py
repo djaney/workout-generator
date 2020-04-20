@@ -1,14 +1,12 @@
 from .exercises import (
-    get_exercises,
-    T_SHOULDER,
-    T_LEGS,
+    T_UPPER,
+    T_LOWER,
     T_CORE,
-    T_BACK,
-    T_ABS,
     T_CARDIO,
+    EXERCISES
 )
 import math
-
+import random
 
 def _generate_by_template(volume, sets, template):
     workouts = []
@@ -32,12 +30,20 @@ def _format_workout(workout, sets):
 
 def generate_balanced(volume, sets):
     template = [
-        (T_SHOULDER, 1),
-        (T_BACK, 1),
-        (T_LEGS, 1),
+        (T_UPPER, 1),
+        (T_LOWER, 1),
         (T_CORE, 1),
-        (T_ABS, 1),
         (T_CARDIO, 1),
     ]
     workout = _generate_by_template(volume, sets, template)
     return _format_workout(workout, sets)
+
+
+def get_exercises(exercise_type, exclude=None):
+    if exclude is None:
+        exclude = []
+
+    choices = list(filter(lambda i: exercise_type == i[1] and i[0] not in exclude, EXERCISES))
+    if len(choices) == 0:
+        return None
+    return random.choice(choices)
