@@ -16,7 +16,7 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Get workout of the day')
-    parser.add_argument('--volume', default=250, help='Total number of reps in this workout')
-    parser.add_argument('--sets', default=5, help='Total number of sets in this workout')
+    parser.add_argument('--volume', default=300, type=int, help='Total number of reps in this workout')
+    parser.add_argument('--sets', default=5, type=int, help='Total number of sets in this workout')
     parser.add_argument('--date', type=lambda s: datetime.strptime(s, '%Y-%m-%d'), help='date')
     main(parser.parse_args())

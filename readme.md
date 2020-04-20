@@ -3,7 +3,7 @@
 
 After cloning, run the following in the project directory
 
-    pip install .
+    python3 -m pip install .
     
 ## Run
     generate-workout
