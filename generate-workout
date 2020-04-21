@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-from workout.generator import generate_balanced
+from workout.generator import Generator
+from workout.templates import get_random_template
+from workout.formatters import CliFormatter
 import argparse
 import random
 from datetime import datetime
@@ -11,7 +13,9 @@ def main(args):
     else:
         date = args.date
     random.seed(date.strftime('%Y-%m-%d'))
-    print(generate_balanced(args.volume, args.sets))
+
+    g = Generator(args.volume, args.sets, formatter=CliFormatter())
+    print(g.generate_by_template(get_random_template()))
 
 
 if __name__ == '__main__':
