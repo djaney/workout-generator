@@ -1,9 +1,7 @@
 # Workout generator
 ## Install
 
-After cloning, run the following in the project directory
-
-    python3 -m pip install .
+    python3 -m pip install -e git+git@github.com:djaney/workout-generator.git#egg=workout-gen
     
 ## Run
     generate-workout [--help]
