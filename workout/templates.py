@@ -2,41 +2,54 @@ from .exercises import (
     T_UPPER,
     T_LOWER,
     T_CORE,
-    T_CARDIO
+    T_CARDIO,
+    S_RUNNING
 )
 import random
 
 
 TEMPLATES = {
     "balanced": {
-        "title": "Balanced workout",
+        "title": "Balanced",
         "exercises": [
-            (T_UPPER, 1),
-            (T_LOWER, 1),
-            (T_CORE, 1),
-            (T_CARDIO, 1),
+            (T_UPPER, []),
+            (T_LOWER, []),
+            (T_CORE, []),
+            (T_CORE, []),
+            (T_CARDIO, []),
         ]
     },
-    "upper-body": {
-        "title": "Upper body focused",
+    "upper": {
+        "title": "Upper body",
         "exercises": [
-            (T_UPPER, 1),
-            (T_UPPER, 1),
-            (T_LOWER, 1),
-            (T_CORE, 1),
-            (T_CORE, 1),
-            (T_CARDIO, 1),
+            (T_UPPER, []),
+            (T_LOWER, []),
+            (T_UPPER, []),
+            (T_CORE, []),
+            (T_CORE, []),
+            (T_CARDIO, []),
         ]
     },
-    "lower-body": {
-        "title": "Lower body focused",
+    "lower": {
+        "title": "Lower body",
         "exercises": [
-            (T_LOWER, 1),
-            (T_LOWER, 1),
-            (T_UPPER, 1),
-            (T_CORE, 1),
-            (T_CORE, 1),
-            (T_CARDIO, 1),
+            (T_LOWER, []),
+            (T_UPPER, []),
+            (T_LOWER, []),
+            (T_CORE, []),
+            (T_CORE, []),
+            (T_CARDIO, []),
+        ]
+    },
+    "running": {
+        "title": "Running",
+        "exercises": [
+            (T_LOWER, [S_RUNNING]),
+            (T_LOWER, [S_RUNNING]),
+            (T_LOWER, [S_RUNNING]),
+            (T_LOWER, [S_RUNNING]),
+            (T_CORE, []),
+            (T_CORE, []),
         ]
     }
 }
