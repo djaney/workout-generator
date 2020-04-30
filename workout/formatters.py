@@ -11,9 +11,8 @@ class CliFormatter(Formatter):
 
     def format(self, workouts, template):
         workout_list = []
-        for exercise, reps in workouts:
+        for exercise, reps, sets in workouts:
             name = exercise[0]
-            sets = self.generator.sets
             reps = str(reps)
             if S_ONE_PER_SIDE in exercise[2]:
                 name += " (one per side)"

@@ -14,7 +14,7 @@ def main(args):
         date = args.date
     random.seed(date.strftime('%Y-%m-%d'))
 
-    g = Generator(args.volume, args.sets, formatter=CliFormatter())
+    g = Generator(args.volume, args.reps, formatter=CliFormatter())
 
     if args.type is not None:
         template = get_template(args.type)
@@ -29,8 +29,8 @@ if __name__ == '__main__':
     type_choices = TEMPLATES.keys()
 
     parser = argparse.ArgumentParser(description='Get workout of the day')
-    parser.add_argument('-v', '--volume', default=300, type=int, help='Total number of reps in this workout')
-    parser.add_argument('-s', '--sets', default=5, type=int, help='Total number of sets in this workout')
+    parser.add_argument('-v', '--volume', default=300, type=int, help='Total number of total reps in this workout')
+    parser.add_argument('-r', '--reps', default=10, type=int, help='Total number of reps in this workout')
     parser.add_argument('-d', '--date', type=lambda s: datetime.strptime(s, '%Y-%m-%d'), help='date')
     parser.add_argument('-t', '--type', type=str, choices=type_choices, help="type of excersise")
     main(parser.parse_args())

@@ -7,13 +7,13 @@ import random
 
 
 class Generator:
-    def __init__(self, volume, sets, formatter=None):
+    def __init__(self, volume, reps, formatter=None):
         self.volume = volume
-        self.sets = sets
+        self.reps = reps
         self.formatter = formatter
 
     @staticmethod
-    def get_exercises(exercise_type, exclude=None, secondary=None, equipment=None):
+    def _get_choices(exercises, exercise_type, exclude=None, secondary=None, equipment=None):
         if exclude is None:
             exclude = []
 
@@ -24,7 +24,7 @@ class Generator:
             equipment = [S_NO_EQUIP]
 
         # filter by type
-        choices = list(filter(lambda i: exercise_type == i[1], EXERCISES))
+        choices = list(filter(lambda i: exercise_type == i[1], exercises))
         # filter by exclude
         choices = list(filter(lambda i: i[0] not in exclude, choices))
         # filter by equipment
@@ -32,20 +32,30 @@ class Generator:
         # filter by secondary type
         if len(secondary) > 0:
             choices = list(filter(lambda i:  len(list(set(i[2]) & set(secondary))) > 0, choices))
+        return choices
+
+    @staticmethod
+    def get_exercises(*argv, **kwargs):
+        choices = Generator._get_choices(EXERCISES, *argv, **kwargs)
         if len(choices) == 0:
             return None
         return random.choice(choices)
 
+    @staticmethod
+    def _calculate_sets(exercises, volume, reps):
+        return math.floor(1 / exercises * volume / reps)
+
     def generate_by_template(self, template):
         workouts = []
         for t, s in template['exercises']:
-            reps = math.floor(1 / len(template['exercises']) * self.volume / self.sets)
+            Generator._calculate_sets(len(template['exercises']), self.volume, self.reps)
+            sets = math.floor(1 / len(template['exercises']) * self.volume / self.reps)
             e = self.get_exercises(t,
                                    exclude=list(map(lambda x: x[0][0], workouts)),
                                    secondary=s)
             if e is None:
                 continue
-            workouts.append((e, math.floor(e[3]*reps)))
+            workouts.append((e, math.floor(e[3]*self.reps), sets))
 
         if self.formatter is None:
             return workouts
