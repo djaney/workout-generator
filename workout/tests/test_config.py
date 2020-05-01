@@ -10,14 +10,14 @@ from ..exercises import EXERCISES
 class ConfigTestCase(unittest.TestCase):
     @patch('pathlib.Path.home')
     def test_get_config_directory(self, dummy_home):
-        dummy_home.return_value = '/dummy'
-        self.assertEqual('/dummy/.workout-gen', Config.get_config_directory())
+        dummy_home.return_value = 'dummy'
+        self.assertEqual(os.path.join('dummy', '.workout-gen'), Config.get_config_directory())
 
     @patch('pathlib.Path.home')
     def test_get_exercises_path(self, dummy_home):
-        dummy_home.return_value = '/dummy'
+        dummy_home.return_value = 'dummy'
         path = Config.get_exercises_path()
-        self.assertEqual(path, '/dummy/.workout-gen/exercises.json')
+        self.assertEqual(path, os.path.join('dummy', '.workout-gen', 'exercises.json'))
 
     @patch('pathlib.Path.home')
     def test_generate_config_directory(self, dummy_home):
