@@ -28,11 +28,11 @@ SECONDARY_LABELS = {
 EXERCISES = [
     # Upper body
     ("Push-up", T_UPPER, [S_NO_EQUIP], 1),
-    ("Plyometric Push-up", T_UPPER, [S_NO_EQUIP, S_PLYOMETRIC], 1),
+    ("Plyometric Push-up", T_UPPER, [S_NO_EQUIP, S_PLYOMETRIC], 0.5),
 
     # Core
-    ("Inchworm", T_CORE, [S_NO_EQUIP], 1),
-    ("Superman", T_CORE, [S_NO_EQUIP], 1),
+    ("Plank with shoulder touch", T_CORE, [S_NO_EQUIP], 1),
+    ("Plank up-down", T_CORE, [S_NO_EQUIP], 1),
     ("Crunches", T_CORE, [S_NO_EQUIP], 1.5),
     ("Plank", T_CORE, [S_SECONDS, S_NO_EQUIP], 2),
     ("Side plank", T_CORE, [S_SECONDS, S_ONE_PER_SIDE, S_NO_EQUIP], 2),
@@ -43,7 +43,7 @@ EXERCISES = [
 
     # Lower body
     ("Lunges", T_LOWER, [S_RUNNING, S_ONE_PER_SIDE, S_NO_EQUIP], 1),
-    ("Squat", T_LOWER, [S_NO_EQUIP], 1),
+    ("Squat", T_LOWER, [S_NO_EQUIP], 1.5),
     ("Squat Jumps", T_LOWER, [S_NO_EQUIP], 1),
     ("Single leg hip thrust", T_LOWER, [S_RUNNING, S_ONE_PER_SIDE, S_NO_EQUIP], 1),
     ("Single leg romanian deadlift", T_LOWER, [S_RUNNING, S_ONE_PER_SIDE, S_NO_EQUIP], 1),

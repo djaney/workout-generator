@@ -4,6 +4,7 @@ from .exercises import (
 )
 import math
 import random
+from .config import Config
 
 
 class Generator:
@@ -36,7 +37,8 @@ class Generator:
 
     @staticmethod
     def get_exercises(*argv, **kwargs):
-        choices = Generator._get_choices(EXERCISES, *argv, **kwargs)
+        c = Config()
+        choices = Generator._get_choices(c.get_exercises(), *argv, **kwargs)
         if len(choices) == 0:
             return None
         return random.choice(choices)
