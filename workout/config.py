@@ -5,7 +5,8 @@ import json
 
 
 VERSION = 1
-
+CONFIG_FILE = "config.json"
+CONFIG_DIR = '.workout-gen'
 
 class InvalidConfigFormat(ValueError):
     pass
@@ -44,12 +45,12 @@ class Config:
 
     @staticmethod
     def get_config_directory():
-        path = os.path.join(str(Path.home()), '.workout-gen')
+        path = os.path.join(str(Path.home()), CONFIG_DIR)
         return path
 
     @staticmethod
     def get_exercises_path():
-        return os.path.join(Config.get_config_directory(), 'exercises.json')
+        return os.path.join(Config.get_config_directory(), CONFIG_FILE)
 
     @staticmethod
     def generate_config_directory():
@@ -60,7 +61,7 @@ class Config:
 
     @staticmethod
     def generate_exercise_config(directory):
-        path = os.path.join(directory, 'exercises.json')
+        path = os.path.join(directory, CONFIG_FILE)
         if os.path.isfile(path):
             with open(path, 'r') as f:
                 try:
