@@ -1,5 +1,5 @@
 import unittest
-from ..config import Config
+from ..config import Config, VERSION
 import tempfile
 from unittest.mock import patch
 import os
@@ -33,7 +33,7 @@ class ConfigTestCase(unittest.TestCase):
             self.assertTrue(os.path.isfile(file_path))
             with open(file_path) as f:
                 file_contents = f.read()
-            self.assertEqual(json.dumps(EXERCISES), file_contents)
+            self.assertEqual(json.dumps({"version": VERSION, "exercises": EXERCISES}), file_contents)
 
     @patch('pathlib.Path.home')
     def test_get_exercises(self, dummy_home):

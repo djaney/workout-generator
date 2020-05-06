@@ -4,6 +4,39 @@ from .exercises import EXERCISES
 import json
 
 
+VERSION = 1
+
+
+class InvalidConfigFormat(ValueError):
+    pass
+
+
+class InvalidConfigObject(ValueError):
+    pass
+
+
+class ConfigObject:
+    def __init__(self, **kwargs):
+        self.version = kwargs.get("version", None)
+        self.exercises = kwargs.get("exercises", EXERCISES)
+
+    @staticmethod
+    def dump(obj, fp):
+        if not isinstance(obj, ConfigObject):
+            raise InvalidConfigObject()
+        return json.dump({"version": obj.version, "exercises": obj.exercises}, fp)
+
+    @staticmethod
+    def load(fp):
+        try:
+            obj = json.load(fp)
+        except json.JSONDecodeError:
+            raise InvalidConfigFormat()
+        if not isinstance(obj, dict):
+            raise InvalidConfigFormat()
+        return ConfigObject(**obj)
+
+
 class Config:
     def __init__(self):
         directory = self.generate_config_directory()
@@ -28,11 +61,18 @@ class Config:
     @staticmethod
     def generate_exercise_config(directory):
         path = os.path.join(directory, 'exercises.json')
-        if not os.path.isfile(path):
-            with open(path, 'w') as f:
-                json.dump(EXERCISES, f)
+        if os.path.isfile(path):
+            with open(path, 'r') as f:
+                try:
+                    if ConfigObject.load(f).version == VERSION:
+                        return
+                except InvalidConfigFormat:
+                    pass
+
+        with open(path, 'w') as f:
+            ConfigObject.dump(ConfigObject(version=VERSION), f)
 
     def get_exercises(self):
         path = self.get_exercises_path()
         with open(path) as f:
-            return json.load(f)
+            return ConfigObject.load(f).exercises
