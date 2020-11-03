@@ -29,8 +29,8 @@ if __name__ == '__main__':
     type_choices = TEMPLATES.keys()
 
     parser = argparse.ArgumentParser(description='Get workout of the day')
-    parser.add_argument('-v', '--volume', default=300, type=int, help='Total number of total reps in this workout')
-    parser.add_argument('-r', '--reps', default=10, type=int, help='Total number of reps in this workout')
-    parser.add_argument('-d', '--date', type=lambda s: datetime.strptime(s, '%Y-%m-%d'), help='date')
-    parser.add_argument('-t', '--type', type=str, choices=type_choices, help="type of excersise")
+    parser.add_argument('-v', '--volume', default=300, type=int, help='Total number of total reps in this workout. (Default: 300)')
+    parser.add_argument('-r', '--reps', default=10, type=int, help='Total number of reps in this workout. (Default: 10)')
+    parser.add_argument('-d', '--date', type=lambda s: datetime.strptime(s, '%Y-%m-%d'), help='date. (Default: today)')
+    parser.add_argument('-t', '--type', type=str, choices=type_choices, help="type of excersise. (Default: random)")
     main(parser.parse_args())
